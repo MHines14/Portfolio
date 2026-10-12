@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ═══ EDIT: page title (shows in the browser tab) ═══════════════════════ -->
+<title>MLB Game Outcome Prediction Model — Matthew Hines</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script>
+  // Same theme key as the homepage, so the choice follows the visitor across pages.
+  // Light is the default.
+  try {
+    var saved = localStorage.getItem('portfolio-theme');
+    document.documentElement.setAttribute('data-theme', saved === 'dark' ? 'dark' : 'light');
+  } catch (e) {}
+</script>
+</head>
+<body>
+
+<!-- ── Top bar: back link + theme toggle ──────────────────────────────────── -->
+<nav class="page-nav">
+  <div class="page-nav-inner">
+    <a href="index.html#projects" class="back-link">← Back to portfolio</a>
+    <button class="theme-toggle" id="themeToggle" aria-label="Switch theme" title="Switch theme">
+      <span class="theme-toggle-icon" data-for="dark">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M21.64 13a1 1 0 0 0-1.05-.14 8.05 8.05 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.6 8.6 0 0 1 .25-2A1 1 0 0 0 8 2.36 10.14 10.14 0 1 0 22 14.05a1 1 0 0 0-.36-1.05z"/>
+        </svg>
+      </span>
+      <span class="theme-toggle-icon" data-for="light">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <circle cx="12" cy="12" r="4.2" fill="currentColor" stroke="none"></circle>
+          <path d="M12 2.6v2M12 19.4v2M2.6 12h2M19.4 12h2M5.4 5.4l1.4 1.4M17.2 17.2l1.4 1.4M18.6 5.4l-1.4 1.4M6.8 17.2l-1.4 1.4"></path>
+        </svg>
+      </span>
+    </button>
+  </div>
+</nav>
+
+<main class="proj-wrap">
+
+  <!-- ═══ EDIT: header block ═════════════════════════════════════════════ -->
+  <header class="proj-header">
+    <div class="proj-category">Sports Analytics · Python / Machine Learning</div>
+    <h1 class="proj-title">MLB Game Outcome Prediction Model</h1>
+    <p class="proj-subtitle">
+      A daily-running model that projects moneyline, total runs, and margin for every MLB
+      game on the slate, then checks its own numbers against live Kalshi markets to see
+      where it actually disagrees with the market. Built solo, iterated through 24 versions,
+      and still running in production every day the season is live.
+    </p>
+
+    <div class="proj-tags">
+      <span class="tag">Python</span>
+      <span class="tag">XGBoost</span>
+      <span class="tag">Pandas</span>
+      <span class="tag">REST APIs</span>
+      <span class="tag">HTML/JS</span>
+    </div>
+
+    <div class="proj-meta">
+      <div class="proj-meta-cell">
+        <div class="proj-meta-label">Role</div>
+        <div class="proj-meta-value">Solo project</div>
+      </div>
+      <div class="proj-meta-cell">
+        <div class="proj-meta-label">Status</div>
+        <div class="proj-meta-value">Live, daily production</div>
+      </div>
+      <div class="proj-meta-cell">
+        <div class="proj-meta-label">Type</div>
+        <div class="proj-meta-value">Python + ML + APIs</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══ IMAGE 1 of 3 — the finished thing. Replace src with your screenshot. -->
+  <figure class="shot">
+    <div class="shot-frame">
+      <img src="images/mlb_model_output.webp" alt="Daily slate output showing each game's projected winner, total runs, and margin next to the Kalshi market comparison">
+    </div>
+    <figcaption class="shot-caption">
+      A full day's slate: model projection next to the live Kalshi line for moneyline, spread, and total runs.
+    </figcaption>
+  </figure>
+
+  <!-- ═══ EDIT: The Problem — 3–5 sentences, plain prose ════════════════ -->
+  <section class="proj-section">
+    <h2 class="proj-section-title">The Problem</h2>
+    <p class="proj-prose">
+      I wanted to build something that actually projects outcomes for every game on a given
+      day, not just season-long stat lines. That meant pulling three seasons of game logs,
+      building features that update daily, training a model on them, and then doing something
+      with the output — checking it against a real market instead of just staring at a backtest
+      number. Most student projects stop at the model. I wanted mine to run every morning on
+      its own and produce something I'd actually look at.
+    </p>
+    <p class="proj-prose">
+      The hard part wasn't the model itself, it was everything around it. Team codes change
+      (the Athletics moved and dropped "Oakland" from their name mid-dataset), different APIs
+      label the same team differently, and Kalshi's market data comes back as a whole ladder
+      of threshold contracts instead of one clean line. None of that shows up in a tutorial.
+      Getting all of it to talk to each other correctly, every single day, without babysitting
+      it, was most of the actual work.
+    </p>
+  </section>
+
+  <!-- ═══ IMAGE 2 of 3 — the process. A query and its output, a cleaning step,
+       or an intermediate chart. It should illustrate something in "What I Built". -->
+  <figure class="shot">
+    <div class="shot-frame">
+      <img src="images/mlb_model_training.webp" alt="Terminal output showing feature engineering and model training, including feature importances">
+    </div>
+    <figcaption class="shot-caption">
+      A training run — feature coverage checks, backtest MAE by fold, and the resulting feature importances.
+    </figcaption>
+  </figure>
+
+  <!-- ═══ EDIT: What I Built — concrete actions, one per bullet ═════════ -->
+  <section class="proj-section">
+    <h2 class="proj-section-title">What I Built</h2>
+    <ul class="built-list">
+      <li>Pulled three seasons of team game logs and built a daily-refreshing feature set — rolling run production, opposing starter quality, team wOBA, bullpen fatigue and quality, platoon splits, park factors, and open-air stadium weather.</li>
+      <li>Trained an XGBoost model with a Poisson objective to project expected runs for each team, with exponential recency weighting so recent games count more than ones from last season without throwing the older data out entirely.</li>
+      <li>Converted the two teams' projected run distributions into win probability, total runs, and margin using Skellam and Poisson math, instead of training three separate models for three different questions.</li>
+      <li>Pulled live probable pitchers and today's full slate from the MLB Stats API every morning, with no manual input required to know who's playing who.</li>
+      <li>Built a live Kalshi integration that pulls the actual moneyline, spread, and total-runs markets for every game and compares the model's number against the market's number, game by game.</li>
+      <li>Built an HTML results tracker that logs every projection, grades it against the actual final score once the game's over, and keeps a running record of hit rate by market.</li>
+      <li>Normalized win probabilities so home and away always sum to 100%, fixing a gap where tie probability from the Skellam distribution was getting dropped instead of resolved to a winner.</li>
+    </ul>
+  </section>
+
+  <!-- ═══ EDIT: Key Decisions or Findings — 2–4 items, TEXT ONLY ════════ -->
+  <section class="proj-section">
+    <h2 class="proj-section-title">Key Decisions &amp; Findings</h2>
+    <div class="decisions">
+      <div>
+        <div class="decision-title">Why edge against the market isn't the same as the actual pick</div>
+        <p class="decision-body">
+          Early on, the tracker graded moneyline picks by which side had better value against
+          Kalshi's price, not which side the model actually favored to win. A team priced at
+          38% by the model but only 32% on Kalshi has real value, but it's still the underdog.
+          Mixing those two questions up made the tracker look worse than the model actually
+          was. I split them — edge is still shown, but grading is strictly "who does the model
+          say wins," which is a different number.
+        </p>
+      </div>
+      <div>
+        <div class="decision-title">Why Kalshi needed its own matching logic, not a simple lookup</div>
+        <p class="decision-body">
+          Kalshi doesn't post one spread and one total line per game — it lists a whole ladder
+          of threshold contracts, and sometimes two events exist for the same two teams at once
+          if a game got postponed and rescheduled. A naive "find the market for these two teams"
+          search grabbed the wrong one more than once. I ended up matching on the closest actual
+          game time instead of just team names, which fixed it.
+        </p>
+      </div>
+      <div>
+        <div class="decision-title">Recency weighting instead of a short rolling window</div>
+        <p class="decision-body">
+          I wanted the model to lean on this season without throwing out the extra training
+          volume from the two seasons before it. A hard cutoff (train on this season only)
+          meant less data and noisier early-season numbers. Instead I weighted every game by
+          an exponential half-life, so a game from six months ago counts for less than one from
+          last week without disappearing from the training set entirely.
+        </p>
+      </div>
+      <div>
+        <div class="decision-title">A silent feature can be worse than a missing one</div>
+        <p class="decision-body">
+          One early version of the bullpen fatigue feature filled missing values with zero
+          instead of leaving them blank, which quietly told the model that two-thirds of its
+          training data had a fully rested bullpen every single game — a confidently wrong
+          number is worse than an honestly missing one. XGBoost handles missing values fine on
+          its own, so the fix was to stop filling gaps and just let them be gaps.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom back link so the visitor isn't stuck scrolling up -->
+  <div class="proj-end">
+    <a href="index.html#projects" class="back-link">← Back to portfolio</a>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-copy">
+      © 2026 Matthew Hines · Built with intentional data
+    </div>
+    <div class="social-links">
+      <a href="#" class="social-link" title="GitHub">GH</a>
+      <a href="#" class="social-link" title="LinkedIn">in</a>
+      <a href="#" class="social-link" title="Twitter">𝕏</a>
+      <a href="#" class="social-link" title="Kaggle">K</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Theme toggle — writes the same localStorage key the homepage uses.
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById('themeToggle');
+    function paint() {
+      var t = root.getAttribute('data-theme');
+      btn.querySelectorAll('.theme-toggle-icon').forEach(function (el) {
+        el.classList.toggle('on', el.dataset.for === t);
+      });
+      btn.title = t === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
+    }
+    btn.addEventListener('click', function () {
+      var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('portfolio-theme', next); } catch (e) {}
+      paint();
+    });
+    paint();
+  })();
+
+  // Any screenshot that has no file yet falls back to a labelled placeholder
+  // instead of a broken-image icon. Delete nothing — it self-disables once the
+  // real image is dropped into images/.
+  document.querySelectorAll('.shot-frame img').forEach(function (img) {
+    if (img.complete && img.naturalWidth === 0) img.closest('.shot-frame').classList.add('missing');
+    img.addEventListener('error', function () {
+      img.closest('.shot-frame').classList.add('missing');
+    });
+  });
+</script>
+</body>
+</html>

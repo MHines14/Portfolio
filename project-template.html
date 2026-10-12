@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ═══ EDIT: page title (shows in the browser tab) ═══════════════════════ -->
+<title>MLB Pitcher Projection Model — Matthew Hines</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script>
+  // Same theme key as the homepage, so the choice follows the visitor across pages.
+  // Light is the default.
+  try {
+    var saved = localStorage.getItem('portfolio-theme');
+    document.documentElement.setAttribute('data-theme', saved === 'dark' ? 'dark' : 'light');
+  } catch (e) {}
+</script>
+</head>
+<body>
+
+<!-- ── Top bar: back link + theme toggle ──────────────────────────────────── -->
+<nav class="page-nav">
+  <div class="page-nav-inner">
+    <a href="index.html#projects" class="back-link">← Back to portfolio</a>
+    <button class="theme-toggle" id="themeToggle" aria-label="Switch theme" title="Switch theme">
+      <span class="theme-toggle-icon" data-for="dark">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M21.64 13a1 1 0 0 0-1.05-.14 8.05 8.05 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.6 8.6 0 0 1 .25-2A1 1 0 0 0 8 2.36 10.14 10.14 0 1 0 22 14.05a1 1 0 0 0-.36-1.05z"/>
+        </svg>
+      </span>
+      <span class="theme-toggle-icon" data-for="light">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <circle cx="12" cy="12" r="4.2" fill="currentColor" stroke="none"></circle>
+          <path d="M12 2.6v2M12 19.4v2M2.6 12h2M19.4 12h2M5.4 5.4l1.4 1.4M17.2 17.2l1.4 1.4M18.6 5.4l-1.4 1.4M6.8 17.2l-1.4 1.4"></path>
+        </svg>
+      </span>
+    </button>
+  </div>
+</nav>
+
+<main class="proj-wrap">
+
+  <!-- ═══ EDIT: header block ═════════════════════════════════════════════ -->
+  <header class="proj-header">
+    <div class="proj-category">Sports Data · Python</div>
+    <h1 class="proj-title">MLB Pitcher Projection Model</h1>
+    <p class="proj-subtitle">
+      A daily-updating projection model for 20–30 starting pitchers that turns FanGraphs
+      game logs, team splits, and park factors into innings, strikeout, and runs-allowed
+      estimates — built to show I can hold a real data pipeline together end to end.
+    </p>
+
+    <div class="proj-tags">
+      <span class="tag">Python</span>
+      <span class="tag">Pandas</span>
+      <span class="tag">SQL</span>
+      <span class="tag">Excel</span>
+    </div>
+
+    <div class="proj-actions">
+      <!-- Code link: always present. Point it at the repo. -->
+      <a href="https://github.com/YOUR-PROFILE/YOUR-REPO" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+        View Code →
+      </a>
+
+      <!-- Live dashboard: OPTIONAL.
+           If there is no live link yet, DELETE the whole <a> below. Nothing else
+           needs changing — the row just shows the one button. -->
+      <a href="https://public.tableau.com/app/profile/YOUR-PROFILE" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+        View Live Dashboard ↗
+      </a>
+    </div>
+
+    <div class="proj-meta">
+      <div class="proj-meta-cell">
+        <div class="proj-meta-label">Role</div>
+        <div class="proj-meta-value">Solo project</div>
+      </div>
+      <div class="proj-meta-cell">
+        <div class="proj-meta-label">Status</div>
+        <div class="proj-meta-value">In progress</div>
+      </div>
+      <div class="proj-meta-cell">
+        <div class="proj-meta-label">Type</div>
+        <div class="proj-meta-value">Python + Excel</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══ IMAGE 1 of 3 — the finished thing. Replace src with your screenshot. -->
+  <figure class="shot">
+    <div class="shot-frame">
+      <img src="images/project-1-dashboard.png" alt="Finished projection dashboard showing per-pitcher innings, strikeout and runs-allowed estimates">
+      <div class="shot-ph">IMAGE 1 — THE FINISHED WORK<br>images/project-1-dashboard.png<br><br>Screenshot of the completed dashboard or core visualization</div>
+    </div>
+    <figcaption class="shot-caption">
+      The daily output: each pitcher's projected line beside the inputs that drove it.
+    </figcaption>
+  </figure>
+
+  <!-- ═══ EDIT: The Problem — 3–5 sentences, plain prose ════════════════ -->
+  <section class="proj-section">
+    <h2 class="proj-section-title">The Problem</h2>
+    <p class="proj-prose">
+      Public pitcher projections are published as season-long averages, which quietly assume
+      every start looks like every other start. I wanted to answer a narrower question: given
+      who a pitcher is facing, where the game is being played, and how he has thrown over his
+      last several outings, what should today's line actually look like?
+    </p>
+    <p class="proj-prose">
+      The data made that harder than it sounds. FanGraphs game logs, team split tables, and
+      park factors all identify players and teams differently, so nothing joined cleanly on
+      the first pass. Rain-shortened starts and openers produced one- and two-inning rows that
+      dragged rate stats around badly, and a pitcher who changed teams mid-season appeared
+      under two different team keys. Most of the work was deciding what counted as a usable
+      start before any modeling could begin.
+    </p>
+  </section>
+
+  <!-- ═══ IMAGE 2 of 3 — the process. A query and its output, a cleaning step,
+       or an intermediate chart. It should illustrate something in "What I Built". -->
+  <figure class="shot">
+    <div class="shot-frame">
+      <img src="images/project-1-process.png" alt="Query joining game logs to team splits, with its result set">
+      <div class="shot-ph">IMAGE 2 — THE PROCESS<br>images/project-1-process.png<br><br>A query and its output, a cleaning step, or an intermediate chart</div>
+    </div>
+    <figcaption class="shot-caption">
+      The join that reconciles game logs with opponent splits, after name keys were normalized.
+    </figcaption>
+  </figure>
+
+  <!-- ═══ EDIT: What I Built — concrete actions, one per bullet ═════════ -->
+  <section class="proj-section">
+    <h2 class="proj-section-title">What I Built</h2>
+    <ul class="built-list">
+      <li>Pulled starting-pitcher game logs from FanGraphs and loaded them into a single table keyed on <code>player_id</code> and <code>game_date</code>.</li>
+      <li>Normalized team abbreviations against a lookup table so mid-season trades resolved to one pitcher record instead of two.</li>
+      <li>Dropped starts under three innings and flagged opener appearances separately, so shortened outings stopped distorting per-start rates.</li>
+      <li>Wrote a query joining game logs to opponent split tables on <code>team_id</code> and handedness to get the batter profile each pitcher actually faced.</li>
+      <li>Calculated a trailing five-start rolling average for K/9, BB/9, and innings per start using a window function over <code>game_date</code>.</li>
+      <li>Applied ballpark run and home-run factors as a multiplier on the runs-allowed estimate.</li>
+      <li>Built the projection output as a daily-refreshing sheet, sorted by projected strikeouts, with each input column visible beside the result.</li>
+    </ul>
+  </section>
+
+  <!-- ═══ IMAGE 3 of 3 — the payoff. The key chart, finding, or number. ══ -->
+  <figure class="shot">
+    <div class="shot-frame">
+      <img src="images/project-1-result.png" alt="Projected versus actual strikeouts across the validation window">
+      <div class="shot-ph">IMAGE 3 — THE PAYOFF<br>images/project-1-result.png<br><br>The key chart, final number, or the finding the project surfaced</div>
+    </div>
+    <figcaption class="shot-caption">
+      Projected versus actual strikeouts over the validation window.
+    </figcaption>
+  </figure>
+
+  <!-- ═══ EDIT: Key Decisions or Findings — 2–4 items, TEXT ONLY ════════ -->
+  <section class="proj-section">
+    <h2 class="proj-section-title">Key Decisions &amp; Findings</h2>
+    <div class="decisions">
+      <div>
+        <div class="decision-title">Why a window function instead of a subquery</div>
+        <p class="decision-body">
+          The trailing five-start average needs a different window for every row, and the
+          correlated subquery version re-scanned the log table once per start — slow, and
+          harder to read six weeks later. A window function partitioned by pitcher and ordered
+          by date computes all of it in one pass, and the intent is legible on the face of the
+          query.
+        </p>
+      </div>
+      <div>
+        <div class="decision-title">Why I cut starts under three innings</div>
+        <p class="decision-body">
+          Rain-shortened games and openers are real appearances, but they describe a decision
+          by the manager rather than the pitcher's form. Leaving them in pulled trailing
+          innings-per-start down for anyone who had a single washed-out outing. Cutting them
+          and flagging openers separately kept the rolling average describing what it claims to.
+        </p>
+      </div>
+      <div>
+        <div class="decision-title">Park factors mattered less than opponent handedness</div>
+        <p class="decision-body">
+          I expected the ballpark multiplier to be the largest correction. It was not — the
+          handedness profile of the opposing lineup moved projected strikeouts noticeably more
+          than any park adjustment did. That reordered what I spend effort on: cleaner split
+          data is worth more here than a finer park model.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom back link so the visitor isn't stuck scrolling up -->
+  <div class="proj-end">
+    <a href="index.html#projects" class="back-link">← Back to portfolio</a>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-copy">
+      © 2026 Matthew Hines · Built with intentional data
+    </div>
+    <div class="social-links">
+      <a href="#" class="social-link" title="GitHub">GH</a>
+      <a href="#" class="social-link" title="LinkedIn">in</a>
+      <a href="#" class="social-link" title="Twitter">𝕏</a>
+      <a href="#" class="social-link" title="Kaggle">K</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Theme toggle — writes the same localStorage key the homepage uses.
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById('themeToggle');
+    function paint() {
+      var t = root.getAttribute('data-theme');
+      btn.querySelectorAll('.theme-toggle-icon').forEach(function (el) {
+        el.classList.toggle('on', el.dataset.for === t);
+      });
+      btn.title = t === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
+    }
+    btn.addEventListener('click', function () {
+      var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('portfolio-theme', next); } catch (e) {}
+      paint();
+    });
+    paint();
+  })();
+
+  // Any screenshot that has no file yet falls back to a labelled placeholder
+  // instead of a broken-image icon. Delete nothing — it self-disables once the
+  // real image is dropped into images/.
+  document.querySelectorAll('.shot-frame img').forEach(function (img) {
+    if (img.complete && img.naturalWidth === 0) img.closest('.shot-frame').classList.add('missing');
+    img.addEventListener('error', function () {
+      img.closest('.shot-frame').classList.add('missing');
+    });
+  });
+</script>
+</body>
+</html>
