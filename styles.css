@@ -1,5 +1,4 @@
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
     --bg: #090b12;
@@ -687,6 +686,34 @@
     line-height: 1.7;
     max-width: 600px;
   }
+  .timeline-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 14px;
+    max-width: 600px;
+  }
+  .timeline-list li {
+    position: relative;
+    padding-left: 22px;
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--text-muted);
+    text-wrap: pretty;
+  }
+  .timeline-list li::before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 0.62em;
+    width: 7px;
+    height: 7px;
+    border-radius: 2px;
+    background: var(--cyan);
+    box-shadow: 0 0 8px var(--cyan-glow);
+  }
+  .timeline-list strong { color: var(--text); font-weight: 600; }
   .timeline-tags {
     display: flex;
     flex-wrap: wrap;
