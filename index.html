@@ -516,6 +516,12 @@
           role: "Student at Arizona State University Business School",
           major: "Business Data Analytics Bachelor of Science",
           desc: "I have developed a strong foundation in data analysis, statistical modeling, and performance evaluation. ",
+          // EDIT: list the things you've done. Add or remove lines as needed.
+          highlights: [
+            "Replace with something you've done",
+            "Replace with another accomplishment",
+            "Add as many lines as you want",
+          ],
           tags: ["Excel", "Tableau", "SQL"],
         },
         {
@@ -1170,8 +1176,15 @@
                         <div className="timeline-dot"></div>
                         <div className="timeline-date">{item.date}</div>
                         <div className="timeline-role">{item.role}</div>
-                        <div className="timeline-company">{item.company}</div>
+                        <div className="timeline-company">{item.company || item.major}</div>
                         <div className="timeline-desc">{item.desc}</div>
+                        {item.highlights && item.highlights.length > 0 && (
+                          <ul className="timeline-list">
+                            {item.highlights.map((h, hi) => (
+                              <li key={hi}>{h}</li>
+                            ))}
+                          </ul>
+                        )}
                         <div className="timeline-tags">
                           {item.tags.map((t) => (
                             <span key={t} className="tag">
